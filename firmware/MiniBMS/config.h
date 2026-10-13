@@ -26,9 +26,9 @@
 // Divider ratio = Rbottom / (Rtop + Rbottom). Start with the nominal values,
 // then replace them with measured ratios (see the calibration step in the guide).
 //   Tap 1: 47k / 100k  -> 100/147 = 0.6803
-//   Tap 2: 100k / 56k  ->  56/156 = 0.3590
-//   Tap 3: 150k / 47k  ->  47/197 = 0.2386
-const float TAP_RATIO[NUM_CELLS] = { 0.6803f, 0.3590f, 0.2386f };
+//   Tap 2: 100k / 51k  ->  51/151 = 0.3377
+//   Tap 3: 220k / 68k  ->  68/288 = 0.2361
+const float TAP_RATIO[NUM_CELLS] = { 0.6803f, 0.3377f, 0.2361f };
 
 // ---------------- Protection thresholds ----------------
 #define CELL_OV_V          4.25f   // Over-voltage fault

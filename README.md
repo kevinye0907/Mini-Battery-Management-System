@@ -38,6 +38,8 @@ load, and trip again.
 
 ## 2. Shopping list (version 1, breadboard)
 
+For exact AliExpress search terms, quantities and buying tips, see [`SHOPPING_LIST.md`](SHOPPING_LIST.md).
+
 Changes from the original list: three **single-cell** holders instead of one 3×
 holder (you need access to the junctions between cells), a **logic-level**
 MOSFET instead of the FDPF55N06, and the plain INA219 **breakout** instead of the FeatherWing.
@@ -54,8 +56,8 @@ MOSFET instead of the FDPF55N06, and the plain INA219 **breakout** instead of th
 | 3 | 47 Ω, 2 W resistor | Balance bleed resistors (~90 mA per cell) |
 | 3 | 10k NTC thermistor, B = 3950 | Epoxy-bead type with leads |
 | 1 | Inline fuse holder + 5 A fuses | Blade or 5×20 mm glass |
-| 2 | 10 Ω, 25 W power resistors | Test load (~1.2 A each at 12 V) |
-| — | 1% metal-film resistors: 47k, 100k ×2, 56k, 150k, 47k, 10k ×7, 100k ×3, 100 Ω, 330 Ω ×3 | Dividers, pull-downs, LED resistors |
+| 3 | 10 Ω, 50 W aluminum-housed resistors | Test load: 1 alone ≈ 1.2 A, 2 in series ≈ 0.6 A, 2 in parallel ≈ 2.5 A. They get hot |
+| — | 1% metal-film resistors: 47k, 100k ×5, 51k, 220k, 68k, 10k ×7, 100 Ω, 330 Ω ×3 | Dividers, pull-downs, LED resistors (all in a standard 30-value kit) |
 | 4 | 100 nF ceramic capacitors | On the ADS1115 inputs, plus one decoupling cap |
 | 1 | 1k–10k potentiometer, 3 × 1 kΩ resistors | Pack simulator |
 | — | Breadboard, jumpers, 18 AWG silicone wire, screw terminals | Power path is **not** on the breadboard |
@@ -105,8 +107,8 @@ The ADS1115 can only read 0–3.3 V, so each tap goes through a divider:
 ```
  Tap ──[R top]──┬──► ADS1115 Ax        Tap  R top  R bottom  ratio   at max V
                 │                      T1   47k    100k      0.680   2.86 V → A0
-           [R bottom]  [100nF]         T2   100k   56k       0.359   3.02 V → A1
-                │         │            T3   150k   47k       0.239   3.01 V → A2
+           [R bottom]  [100nF]         T2   100k   51k       0.338   2.84 V → A1
+                │         │            T3   220k   68k       0.236   2.98 V → A2
  GND ───────────┴─────────┘
 ```
 
