@@ -1,69 +1,37 @@
-# MiniBMS shopping list
+# Shopping list
 
-Search terms are written so you can paste them into AliExpress. Buy a few spares
-of anything small: AliExpress parts are cheap, and shipping takes 1–3 weeks.
+This is everything the two-week build in `PLAN.md` needs. Check what you already own
+before ordering: if you have an ESP32, a breadboard and a resistor kit, you only need to
+buy the first three items.
 
-## A. Core electronics
+## Buy
 
-| Qty | Search term | Notes |
-|---|---|---|
-| 2 | `ESP32 DevKitC WROOM-32 38pin USB-C` | Pick the CP2102 or CH340 USB chip. A spare saves you if one dies |
-| 1 | `ESP32 expansion board 38pin` (screw-terminal breakout) | Optional but handy: the ESP32 is too wide for one breadboard |
-| 2 | `INA219 module I2C` | Current + pack-voltage sensor |
-| 2 | `ADS1115 module 16 bit` | Precise ADC for the cell voltages |
-| 10 | `IRLB8721 TO-220` | 1 load switch + 3 balancers + spares. Must be **IRLB**8721 (logic-level) |
-| 20 | `PC817 DIP-4 optocoupler` | You need 3 |
-| 5 | `NTC 10K 3950 thermistor epoxy` (MF52 type, ~1 m leads) | You need 3 |
+| Qty | Part | AliExpress search term | Why |
+|---|---|---|---|
+| 1 | ADS1115 module | `ADS1115 module 16 bit` | Reads the three cell voltages |
+| 5 | IRLB8721 MOSFET | `IRLB8721 TO-220` | Switches the load off (spares included) |
+| 1 | 10 Ω, 50 W resistor | `10 ohm 50W aluminum shell resistor` | The load. It gets hot: rest it on metal or a tile |
 
-## B. Passive components
+## Use what you have, or buy
 
-| Qty | Search term | Notes |
-|---|---|---|
-| 1 | `1% metal film resistor kit 30 values 600pcs` | Check the listing includes 100Ω, 330Ω, 1k, 10k, 47k, 51k, 68k, 100k, 220k |
-| 10 | `47 ohm 2W metal film resistor` | Balance bleed resistors (need 3) |
-| 1 | `ceramic capacitor kit` (must include 100nF / 104) | |
-| 1 | `3296 trimmer potentiometer kit` (or 2 × `B2K potentiometer`) | For the pack simulator |
-| 3 | `10 ohm 50W aluminum shell resistor` | Test loads. They get hot: mount on scrap aluminum or a tile |
+| Qty | Part | AliExpress search term | Needed values / notes |
+|---|---|---|---|
+| 1 | ESP32 dev board (38-pin) | `ESP32 DevKitC WROOM-32 38pin` | Any ESP32 dev board works |
+| 1 | 1% resistor kit | `1% metal film resistor kit 30 values` | 47k, 51k, 68k, 100k, 220k, 1k ×3, 10k, 100 Ω |
+| 1 | Breadboard + jumper wires | `830 point breadboard`, `dupont jumper wire` | |
+| 3 | 100 nF ceramic capacitors | `ceramic capacitor 104` | Optional: steadies the ADC readings |
 
-## C. Battery hardware
+## Borrow if you can
 
-| Qty | Search term | Notes |
-|---|---|---|
-| 5 | `18650 battery holder 1 slot with wire` | Single holders, so every cell junction is reachable. Need 3 |
-| 1 | `inline mini blade fuse holder 16AWG` | |
-| 1 | `mini blade fuse 5A` (pack of 10) | |
-| 1 | `LiPo safe bag fireproof` (large) | All real-cell testing happens inside it |
+| Tool | Notes |
+|---|---|
+| Multimeter | Needed to calibrate the readings |
+| Bench power supply (0–15 V, current limit) | Stands in for the battery. A school lab or your design team will have one. Budget option to buy: `ZK-4KX buck boost CC CV` + `24V 3A power adapter` |
+| Soldering iron | The ADS1115 usually arrives with loose header pins |
 
-## D. Wiring and prototyping
+## Only if you extend the project later
 
-| Qty | Search term | Notes |
-|---|---|---|
-| 2 | `830 point breadboard` | The ESP32 straddles two boards |
-| 1 | `dupont jumper wire 40pin` M-M, M-F, F-F | |
-| 1 | `22AWG solid core wire kit` | Neat breadboard wiring |
-| 1 | `18AWG silicone wire` red + black | The high-current power path |
-| 1 | `lever wire connector 221` (pack of 10–20) | Easy, solder-free power connections |
-| 1 | `heat shrink tube kit` | |
-| 1 | `kapton tape` | Holds thermistors on cells; doesn't melt |
-
-## E. Tools (skip what you can borrow)
-
-| Qty | Search term | Notes |
-|---|---|---|
-| 1 | `ANENG AN8008` or `ZOYI ZT102` multimeter | Essential |
-| 1 | `Pinecil` soldering iron (or any temperature-controlled iron) + `0.8mm solder` + `flux` | Breakout boards usually arrive with headers you solder yourself |
-| 1 | **Power supply.** Best: `DC lab power supply 30V 5A`. Budget: `ZK-4KX buck boost CC CV` module + a `24V 3A power adapter` | Needs adjustable voltage **and** a current limit. Lets you simulate the pack safely |
-| 1 | `MP1584 buck converter` | Later: powers the ESP32 from the pack |
-
-## F. Don't buy these on AliExpress
-
-**18650 cells.** Most cheap AliExpress cells are fakes or rewrapped used cells,
-often with a fraction of the claimed capacity ("9900mAh" is always fake). Buy
-**3 matched cells (+1 spare)** from a reputable battery retailer or a vape shop:
-Molicel P26A, Samsung 25R/30Q or LG HG2. Get them all at once, same model.
-
-**Charger:** XTAR or Nitecore (e.g. XTAR VC4SL), from the brand's official store
-or a local retailer.
-
-## G. Can wait until the PCB stage
-TI BQ76920 evaluation board, KiCad (free), JST-XH balance connectors.
+- **Week 3, current sensing:** `INA219 module I2C`.
+- **Full BMS (balancing, temperature, real cells):** PC817 optocouplers, 47 Ω 2 W resistors,
+  10k NTC thermistors, single 18650 holders, a 5 A inline fuse, a LiPo safety bag, and
+  matched 18650 cells plus a charger from a reputable local seller (not AliExpress).
